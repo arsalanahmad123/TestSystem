@@ -1,0 +1,26 @@
+<%= turbo_frame_tag "new-question" do %>
+  <div class="flex flex-col items-center justify-items-center mt-20 mb-20 md:w-[50%] backdrop-blur-sm bg-white rounded-2xl shadow shadow-indigo-500 p-10 absolute top-10 lg:left-[350px] md:left-60 sm:w-[50%] sm:left-40 overflow-hidden ">
+    <h1 class="text-center text-3xl text-indigo-500 font-bold">New Question</h1>
+    <div class="flex flex-row justify-between items-center mt-4">
+      <%= form_with(model: [paper, question]) do |f| %>
+        <label for="question" class="block text-sm font-bold text-gray-700 text-[20px]">Question</label>
+        <div class="flex flex-row justify-between items-center gap-x-5 flex-wrap gap-3">
+          <%= f.text_field :content, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm font-bold border-gray-300 rounded-md",placeholder: "Question", autofocus: true %>
+          <%= f.text_field :choice1, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm font-bold border-gray-300 rounded-md",placeholder: "Choice 1" %>
+          <%= f.text_field :choice2, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm font-bold border-gray-300 rounded-md",placeholder: "Choice 2" %>
+          <%= f.text_field :choice3, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm font-bold border-gray-300 rounded-md",placeholder: "Choice 3" %>
+          <%= f.text_field :choice4, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm font-bold border-gray-300 rounded-md",placeholder: "Choice 4" %>
+          <div class="flex flex-col w-full">
+            <span class="text-sm text-indigo-700">Choose Correct Option like: 1,2,3,4</span>
+            <%= f.number_field :correct_option, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm font-bold border-gray-300 rounded-md",placeholder: "Correct Option" %>
+          </div>
+          <div class="flex flex-row justify-between items-center gap-x-5 mx-auto">
+            <%= f.submit "Submit", class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm  border-gray-300 rounded-md bg-indigo-500 hover:bg-indigo-700 text-white py-2 font-bold text-[20px] cursor-pointer px-4" %>
+            OR 
+            <%= link_to "Cancel",paper_path(@paper), class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm  border-gray-300 rounded-md bg-indigo-500 hover:bg-indigo-700 text-white py-2 font-bold text-[20px] cursor-pointer text-center px-4" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

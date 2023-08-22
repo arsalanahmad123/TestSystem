@@ -1,0 +1,26 @@
+<div class="navbar rounded-lg">
+  <div class="navbar-start flex flex-wrap">
+    <%= image_tag "logo.svg",class: "w-[60px] h-[60px] mr-2" %>
+    <h1 class="text-2xl font-bold hidden md:block">IkramForcesAcademy</h1>
+  </div>
+  <div class="navbar-center">
+    <% if current_user && current_user.admin? %>
+      <%= link_to "Papers",papers_path,class: "btn btn-ghost font-bold " %>
+    <% end %>
+  </div>
+  <div class="navbar-end">
+    <div class="dropdown-container">
+      <div class="dropdown">
+        <label class="cursor-pointer" tabindex="0">
+          Account
+        </label>
+        <div class="dropdown-menu dropdown-menu-bottom-left">
+          <a class="dropdown-item font-bold">Profile</a>
+          <% if current_user %>
+            <%= link_to "Logout",logout_path,data:{turbo_method: "delete"},class: "dropdown-item font-bold text-red-500" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+class QuestionsController < ApplicationController
+    before_action :set_paper, only: [:new, :create,:destroy]
+    def new 
+        @question = @paper.questions.build 
+    end
+
+    def create 
+        @question = @paper.questions.build(question_params)
+        if @question.save
+            respond_to do |format|
+                format.turbo_stream{
+                    render turbo_stream: (
+                        [
+                        turbo_stream.append("questions", 
+                            partial: "questions/question",
+                            locals: {question: @question,index: @paper.questions.count}
+                            
+                        ),
+                        turbo_stream.replace("new-question",
+                            partial: "questions/form",
+                            locals: {question: Question.new,paper: @paper}
+                        )
+                        ]
+                    )
+                }
+            end
+        else
+            render 'new', status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+
+    end
+
+    private 
+
+        def set_paper 
+            @paper = Paper.friendly.find(params[:paper_id])
+        end
+
+        def question_params
+            params.require(:question).permit(:content, :correct_option,:paper_id,:choice1,:choice2,:choice3,:choice4)
+        end
+end

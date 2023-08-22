@@ -1,0 +1,17 @@
+<div class="accordion" dom_id="paper-<%= paper.id %>">
+  <input type="checkbox" id="paper-<%= paper.id %>" class="accordion-toggle" />
+  <label for="paper-<%= paper.id %>" class="accordion-title"><%= paper.title %></label>
+  <span class="accordion-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path></svg>
+  </span>
+  <div class="accordion-content text-content2">
+    <div class="min-h-0 flex justify-between items-center">
+      <span class="font-medium"><%= paper.description %></span>
+      <% if current_user && current_user.admin? %>
+        <%= link_to "Show", paper_path(paper), class: "btn btn-sm font-bold text-indigo-500 hover:text-indigo-700" %>
+      <% end %>
+      <span class="font-medium"><%= paper.minutes %> minutes</span>
+      <span class="btn bg-slate-100 font-bold">Start Paper</span>
+    </div>
+  </div>
+</div>

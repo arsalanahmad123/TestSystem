@@ -1,0 +1,13 @@
+<div class="flex flex-col mt-5">
+  <div class="flex flex-row justify-between items-center">
+    <h1 class="text-center text-5xl mb-10 font-extrabold text-indigo-500">Papers</h1>
+    <% if current_user && current_user.admin? %>
+      <%= link_to "New Paper",new_paper_path, class: "btn btn-solid-primary font-bold text-[18px]",data: {turbo_frame: "new-paper",turbo_method: "get"} %>
+    <% end %>
+  </div>
+  <div class="accordion-group accordion-group-bordered" id="papers">
+    <%= render @papers %>
+  </div>
+  <%= turbo_frame_tag "new-paper",class: "mb-10 mt-10" do %>
+  <% end %>
+</div>
