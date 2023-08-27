@@ -1,18 +1,21 @@
-<div class="navbar rounded-lg">
+<div class="navbar rounded-md ">
   <div class="navbar-start flex flex-wrap">
-    <%= image_tag "logo.svg",class: "w-[60px] h-[60px] mr-2" %>
-    <h1 class="text-2xl font-bold hidden md:block">IkramForcesAcademy</h1>
+    <%= link_to current_user ? papers_path : root_path do %>
+      <%= image_tag "logo.svg",class: "w-[60px] h-[60px] mr-2" %>
+      <h1 class="font-bold hidden md:block">IkramForcesAcademy</h1>
+    <% end %>
   </div>
   <div class="navbar-center">
     <% if current_user && current_user.admin? %>
       <%= link_to "Papers",papers_path,class: "btn btn-ghost font-bold " %>
+      <%= link_to "Users",users_path,class: "btn btn-ghost font-bold " %>
     <% end %>
   </div>
   <div class="navbar-end">
     <div class="dropdown-container">
       <div class="dropdown">
-        <label class="cursor-pointer" tabindex="0">
-          Account
+        <label class="cursor-pointer btn btn-ghost" tabindex="0">
+          <%= current_user ? current_user.username : "Account" %>
         </label>
         <div class="dropdown-menu dropdown-menu-bottom-left">
           <a class="dropdown-item font-bold">Profile</a>

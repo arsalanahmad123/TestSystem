@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-    helper_method :current_user,:logged_in?,:login,:logout,:require_admin
+    helper_method :current_user,:logged_in?,:login,:logout,:require_admin,:require_approved_user,:restrict_user,:require_user
 
     def current_user 
         @current_user ||= User.find_by(id: session[:user_id])
@@ -29,6 +29,19 @@ class ApplicationController < ActionController::Base
         unless logged_in?
             flash[:error] = "You must be logged in to access this section"
             redirect_to root_path
+        end
+    end
+
+    def require_approved_user 
+        unless current_user && current_user.allowed? || current_user.admin? 
+            flash[:error] = "You must be approved to access this section.Kindly contact your administrator"
+            redirect_to request.referrer || root_path
+        end
+    end
+
+    def restrict_user 
+        if current_user 
+            redirect_to papers_path, notice: "You are already logged in"
         end
     end
 

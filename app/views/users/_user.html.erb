@@ -1,0 +1,11 @@
+<tr id="user-<%= user.id %>">
+  <th>1</th>
+  <td class="font-bold"><%= user.username %></td>
+  <td class="font-bold"><%= user.email %></td>
+  <td class="flex flex-row justify-start items-start">
+    <%= link_to verify_user_path(user), data: {turbo_method: "put",turbo_frame: "verify-user"},class: "flex flex-row justify-center items-center text-indigo-500 hover:text-indigo-600 font-bold" do  %>
+      <i class="material-icons"><%= user.allowed? ? "block" : "verified" %> </i>
+      <%= user.allowed? ? "Block" : "Verify" %>
+    <% end %>
+  </td>
+</tr>

@@ -1,23 +1,26 @@
 <%= turbo_frame_tag "login" do %>
-  <h1 class="font-extrabold text-indigo-500 text-6xl mb-5">
-    Signup Here
-  </h1>
+  <div class="flex flex-col mb-5 text-center sm:flex-wrap">
+    <h1 class="font-extrabold text-indigo-500 text-6xl mb-5">
+      Signup Here
+    </h1>
+    <span class="text-sm text-red-400 bg-red-50 rounded-sm p-1">Kindly Enter Details of Student correctly so that we can recognize each student in our academy</span>
+  </div>
   <%= form_with model: @user,data: {turbo: false} do |f| %>
     <div class="mb-2">
       <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-      <%= f.text_field :username, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+      <%= f.text_field :username, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",required: true %>
     </div>
     <div class="mb-2">
       <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-      <%= f.text_field :email, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+      <%= f.email_field :email, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",required: true %>
     </div>
     <div class="mb-2">
       <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-      <%= f.password_field :password, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+      <%= f.password_field :password, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",required: true %>
     </div>
     <div class="mb-2">
       <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Password Confirmation</label>
-      <%= f.password_field :password_confirmation, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+      <%= f.password_field :password_confirmation, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",required: true %>
     </div>
     <div class="mb-2">
       <%= f.submit class: "zmt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md cursor-pointer bg-indigo-500 py-2 font-bold text-white hover:bg-indigo-700" %>

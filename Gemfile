@@ -81,3 +81,5 @@ gem "devise", "~> 4.9"
 gem "bcrypt", "~> 3.1"
 
 gem "friendly_id", "~> 5.5"
+
+gem "byebug", "~> 11.1"

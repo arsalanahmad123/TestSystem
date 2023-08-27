@@ -1,7 +1,6 @@
 module ApplicationHelper
 
-    def flash_message(type)
-        puts "Flash Type: #{type.inspect}"
+    def flash_message(type) 
         case type
         when :success 
             "alert-success"

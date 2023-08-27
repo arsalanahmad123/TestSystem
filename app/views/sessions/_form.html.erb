@@ -15,7 +15,5 @@
       <%= f.submit "Login" ,class: "zmt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md cursor-pointer bg-indigo-500 py-2 font-bold text-white hover:bg-indigo-700" %>
     </div>
   <% end %>
-  <% if current_user && current_user.admin? %>
-    <%= link_to "Create new account", new_user_path,class: "text-indigo-500 hover:text-indigo-700 text-end" %>
-  <% end %>
+  <%= link_to "Create new account", new_user_path,class: "text-indigo-500 hover:text-indigo-700 text-end" %>
 <% end %>

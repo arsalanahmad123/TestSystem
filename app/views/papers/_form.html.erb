@@ -13,8 +13,10 @@
       <label for="minutes" class="block text-indigo-700 font-semibold">Total minutes for solving</label>
       <%= p.number_field :minutes, class: "block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg",required: true %>
     </div>
-    <div class="mb-2">
-      <%= p.submit "Create", class: "btn btn-solid-primary font-bold text-[18px]" %> or <%= link_to "Cancel",papers_path, class: "btn btn-solid-primary font-bold text-[18px]" %>
+    <div class="mb-2 flex justify-between items-center flex-wrap gap-3">
+      <%= p.submit "Create", class: "btn btn-solid-primary font-bold text-[18px]" %>
+      <span class="font-bold">OR</span>
+      <%= link_to "Cancel",papers_path, class: "btn btn-solid-primary font-bold text-[18px]" %>
     </div>
   <% end %>
 <% end %>

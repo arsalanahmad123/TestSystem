@@ -12,5 +12,7 @@ document.addEventListener("turbo:load", function () {
     triggerElement.addEventListener("click", function () {
         modalFrame.classList.toggle("hidden");
     });
+
 });
+
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_21_171714) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_25_173955) do
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_171714) do
   create_table "questions", force: :cascade do |t|
     t.text "content"
     t.integer "paper_id", null: false
-    t.integer "correct_option"
+    t.integer "correct_option", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "choice1"
@@ -45,6 +45,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_171714) do
     t.index ["paper_id"], name: "index_questions_on_paper_id"
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "question_id", null: false
+    t.text "choice"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_responses_on_question_id"
+    t.index ["user_id"], name: "index_responses_on_user_id"
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer "paper_id", null: false
+    t.integer "user_id", null: false
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "total_question_count"
+    t.index ["paper_id"], name: "index_scores_on_paper_id"
+    t.index ["user_id"], name: "index_scores_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -52,7 +73,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_171714) do
     t.datetime "updated_at", null: false
     t.string "password_digest", null: false
     t.integer "role", default: 0
+    t.boolean "allowed", default: false
   end
 
   add_foreign_key "questions", "papers"
+  add_foreign_key "responses", "questions"
+  add_foreign_key "responses", "users"
+  add_foreign_key "scores", "papers"
+  add_foreign_key "scores", "users"
 end

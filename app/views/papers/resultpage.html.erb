@@ -1,0 +1,63 @@
+<div class="bg-gradient-to-br from-slate-800 to-slate-950 shadow-xl p-10 shadow-indigo-200 animate__animated animate__bounceInDown mb-10 rounded-md">
+  <h1 class="text-5xl font-bold mt-10 text-center text-white">Result</h1>
+  <div class="mt-10 text-[20px] bg-gradient-to-tr from-indigo-300 to-blue-800 p-2 rounded-md w-fit ml-auto text-white">
+    <span>You got <span class="font-bold"><%= @score.score %></span> out of <%= @score.total_question_count %></span>
+  </div>
+  <div class="mt-10">
+    <h1 class="text-3xl text-indigo-500 font-bold">Questions</h1>
+  </div>
+  <% @questions.each_with_index do |question, index| %>
+    <div class="mt-5 flex flex-col gap-y-5">
+      <div class="bg-slate-300 p-2 rounded-sm">
+        <span class="font-bold text-[20px]">Q.<%= index+1 %> <%= question.content %>?</span>
+      </div>
+      <div class="flex flex-col text-white">
+        <% # Get the user's response for this question %>
+        <% user_response = @responses.find { |response| response.question_id == question.id } %>
+        <span class="<%= 'text-green-500 font-extrabold' if user_response && user_response.choice.to_i == question.correct_option && user_response.choice.to_i ==1  %> <%= 'text-red-500 font-extrabold' if user_response && user_response.choice.to_i != question.correct_option && user_response.choice.to_i ==1   %>">
+          <span class="flex flex-row gap-2">
+            <span >A.</span>
+            <%= question.choice1 %>
+          </span>
+        </span>
+        <span class="<%= 'text-green-500 font-extrabold' if user_response && user_response.choice.to_i == question.correct_option && user_response.choice.to_i ==2 %><%= 'text-red-500 font-extrabold' if user_response && user_response.choice.to_i != question.correct_option && user_response.choice.to_i ==2   %> ">
+          <span class="flex flex-row gap-2">
+            <span >B.</span>
+            <%= question.choice2 %>
+          </span>
+        </span>
+        <span class="<%= 'text-green-500 font-extrabold' if user_response && user_response.choice.to_i == question.correct_option && user_response.choice.to_i ==3  %> <%= 'text-red-500 font-extrabold' if user_response && user_response.choice.to_i != question.correct_option && user_response.choice.to_i ==3   %> ">
+          <span class="flex flex-row gap-2">
+            <span >C.</span>
+            <%= question.choice3 %>
+          </span>
+        </span>
+        <span class="<%= 'text-green-500 font-extrabold' if user_response && user_response.choice.to_i == question.correct_option && user_response.choice.to_i ==4  %> <%= 'text-red-500 font-extrabold' if user_response && user_response.choice.to_i != question.correct_option && user_response.choice.to_i ==4   %> ">
+          <span class="flex flex-row gap-2">
+            <span >D.</span>
+            <%= question.choice4 %>
+          </span>
+        </span>
+      </div>
+      <div class="flex justify-end items-center">
+        <span class="font-bold text-[20px] mt-5">
+          <div class="flex flex-row justify-center items-center text-success">
+            <% if user_response && user_response.choice.to_i == question.correct_option  %>
+              <i class="material-icons">check_circle</i>
+              Correct 
+            <% end %>
+          </div>
+          <% if user_response && user_response.choice.to_i != question.correct_option %>
+            <div class="flex flex-col justify-center items-start text-error">
+              <div class="flex flex-row">
+                <i class="material-icons">dangerous</i>
+                Wrong
+              </div>
+              Correct Answer is : <%= question.send("choice#{question.correct_option}") %>
+            </div>
+          <% end %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>
