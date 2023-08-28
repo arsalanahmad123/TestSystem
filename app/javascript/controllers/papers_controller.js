@@ -10,7 +10,7 @@ export default class extends Controller {
   nextButton = document.getElementById("next-button");
   preloader = document.getElementById("preloader");
 
-  countDown = document.getElementById("countdown-timer");
+  countdownMinutes = this.element.getAttribute("data-papertime");
 
   connect() {
     this.showQuestion(this.currentIndexValue);
@@ -64,9 +64,10 @@ export default class extends Controller {
   }
 
 
-  startCountdown() {
-    let countdownMinutes = 1;
-    let remainingTime = this.countdownMinutes * 60; // Convert minutes to seconds
+  startCountDown() {
+    let remainingTime = 60 * this.countdownMinutes; // 1 minute in seconds
+
+    const countdownTimer = this.countDownTarget;
 
     // Update the countdown timer element every second
     this.countdownInterval = setInterval(() => {
@@ -74,25 +75,22 @@ export default class extends Controller {
       const seconds = remainingTime % 60;
 
       // Display the remaining time in the format "mm:ss"
-      this.countDown.textContent = `${minutes
+      countdownTimer.textContent = `${minutes
         .toString()
         .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
       remainingTime--;
 
-      // When the countdown reaches 0, submit the paper form
+      // When the countdown reaches 0, stop the timer
       if (remainingTime < 0) {
-        this.countDown.textContent = "Time's up!";
-        this.preloader.classList.remove("hidden");
-        this.preloader.classList.add("flex");
-        setTimeout(() => {
-          this.preloader.classList.add("hidden");
-          this.paperFormTarget.submit();
-        }, 3000);
-
+        countdownTimer.textContent = "Time's up!";
         clearInterval(this.countdownInterval);
       }
     }, 1000); // Update every second
+  }
+
+  get countDownTarget() {
+    return this.targets.find("countdown-timer");
   }
 
 
