@@ -1,7 +1,7 @@
 class PapersController < ApplicationController
     before_action :require_user, only: [:index]
-    before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
-    before_action :set_paper, only: [:show, :edit, :update, :destroy,:resultpage]
+    before_action :require_admin, only: [:new, :create, :edit, :update, :destroy,:allowpaper]
+    before_action :set_paper, only: [:show, :edit, :update, :destroy,:resultpage,:allowpaper]
     before_action :require_approved_user,only: [:paperstart,:submitPaper,:resultpage]
 
     def index 
@@ -76,7 +76,7 @@ class PapersController < ApplicationController
         end
         score = Score.find_or_initialize_by(paper_id: @paper.id, user_id: @user.id,total_question_count: @paper.questions.count)
         score.update(score: @score)
-        redirect_to resultpage_path(@paper),notice: "Paper Submitted! your score is #{@score} out of #{@questions.count}"
+        redirect_to resultpage_path(@paper)
     end
 
     def resultpage
@@ -85,8 +85,23 @@ class PapersController < ApplicationController
         @responses = []
         @questions.each do |question|
             response = Response.find_by(user_id: current_user.id,question_id: question.id)
-            @responses << response
-            puts "#{response.choice}"
+            @responses << response 
+        end
+    end
+
+    def allowpaper 
+        if @paper.allowed?
+            @paper.update(allowed: false)
+        else
+            @paper.update(allowed: true)
+        end
+
+        respond_to do |format|
+            format.turbo_stream do
+                render turbo_stream: [
+                turbo_stream.replace("access", partial: "papers/access", locals: { paper: @paper })
+                ]
+            end
         end
     end
 
@@ -100,6 +115,13 @@ class PapersController < ApplicationController
 
         def set_paper 
             @paper = Paper.friendly.find(params[:id])
+        end
+
+        def check_paper_allowed?
+            unless @paper.allowed?
+                flash[:error] = "Currently paper is not allowed"
+                redirect_to request.referrer || root_path
+            end
         end
 
 end

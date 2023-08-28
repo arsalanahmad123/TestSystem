@@ -4,6 +4,10 @@
     <%= link_to "Add Question", new_paper_question_path(@paper),data: {
       turbo_frame: "new-question"
     } ,class: "btn btn-ghost btn-sm bg-indigo-500 hover:bg-indigo-700 text-white mr-2" %>
+    <%= link_to "Change Access", allowpaper_path(@paper),data: {turbo_method: "put"},class: "btn btn-ghost btn-sm bg-indigo-500 hover:bg-indigo-700 text-white" %>
+    <div id="access">
+      <%= render "papers/access", paper: @paper %>
+    </div>
   <% end %>
 </div>
 <div class="flex w-full overflow-x-auto mt-10">
@@ -17,6 +21,7 @@
         <th class="font-bold">Choice-3</th>
         <th class="font-bold">Choice-4</th>
         <th class="font-bold">Answer</th>
+        <th class="font-bold">Action</th>
       </tr>
     </thead>
     <tbody id="questions">

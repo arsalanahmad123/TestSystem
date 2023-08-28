@@ -1,8 +1,7 @@
-<div class="navbar rounded-md ">
-  <div class="navbar-start flex flex-wrap">
+<div class="navbar rounded-md p-5">
+  <div class="navbar-start">
     <%= link_to current_user ? papers_path : root_path do %>
-      <%= image_tag "logo.svg",class: "w-[60px] h-[60px] mr-2" %>
-      <h1 class="font-bold hidden md:block">IkramForcesAcademy</h1>
+      <h1 class="font-bold lg:text-3xl text-2xl italic text-indigo-500">IkramForcesAcademy</h1>
     <% end %>
   </div>
   <div class="navbar-center">

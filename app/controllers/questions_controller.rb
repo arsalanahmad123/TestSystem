@@ -29,8 +29,17 @@ class QuestionsController < ApplicationController
         end
     end
 
-    def destroy
-
+    def destroy 
+        @question = @paper.questions.find(params[:id])
+        @question.destroy
+        respond_to do |format|
+            format.turbo_stream{
+                render turbo_stream: 
+                [turbo_stream.remove(@question),
+                    turbo_stream.replace("questions",partial: "questions/questions",locals: {questions: @paper.questions})
+                ]
+            }
+        end
     end
 
     private 

@@ -15,6 +15,7 @@ put "/verify_user/:id",to: "users#verify_user",as: "verify_user"
 get "/startpaper/:id",to: "papers#paperstart",as: "startpaper"
 post "/startpaper/:id",to: "papers#submitPaper",as: "submitpaper"
 get "/result/:id",to: "papers#resultpage",as: "resultpage"
+put "/allowpaper/:id",to: "papers#allowpaper",as: "allowpaper"
 
 
 end

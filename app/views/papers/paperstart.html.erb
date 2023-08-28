@@ -4,10 +4,11 @@
 <div id="question-container" data-controller ="papers" data-questions-current-index="0">
   <%= form_for startpaper_path,data: {papers_target: "paperForm"} do |r| %>
     <input type="hidden" name="paper_id" value="<%= @paper.id %>">
+    <div class="absolute top-30 z-50 right-10 bg-slate-700 text-white font-bold p-5 rounded-2xl text-[19px]" id="countdown-timer"></div>
     <% @questions.each_with_index do |q,index| %>
-      <div class="question p-10 bg-slate-100 rounded-lg animate__animated animate__bounceInRight"  data-papers-target="question">
+      <div class="question relative p-10 bg-slate-200 rounded-lg animate__animated animate__bounceInRight w-full h-full"  data-papers-target="question">
         <div class="mb-4">
-          <h1 class="lg:text-5xl text-4xl text-indigo-500 font-bold">Q<%= index + 1 %>.<%= q.content %></h1>
+          <h1 class="lg:text-5xl text-4xl text-indigo-500 font-bold">Q<%= index + 1 %>.<%= q.content %>?</h1>
         </div>
         <label class="flex cursor-pointer gap-2 py-5 text-slate-950 font-semibold text-[17px]">
           <input type="radio" name="choice-<%= q.id %>" value="1" class="radio radio-xl" data-action="click->papers#checkRadio" >
@@ -28,17 +29,19 @@
           >
           <%= q.choice4 %>
         </label>
-        <div class="mb-4 mt-10">
-          <button id="prev-button" class="bg-gray-300 px-4 py-2 mr-2 rounded-md" data-action="click->papers#prev" >Previous</button>
-          <button id="next-button" class="bg-blue-500 text-white px-4 py-2 rounded-md" data-action="click->papers#next">Next</button>
+        <div class="mb-4 mt-10 flex justify-between sm:flex-wrap">
+          <div class="flex">
+            <button id="prev-button" class="bg-slate-300 px-4 py-2 mr-2 rounded-md font-bold" data-action="click->papers#prev" >Previous</button>
+            <button id="next-button" class="bg-slate-300 px-4 py-2 rounded-md font-bold" data-action="click->papers#next">Next</button>
+          </div>
+          <button id="submit-button" class="bg-gradient-to-br from-indigo-100 to-indigo-300 px-4 py-2 rounded-md font-extrabold " data-action="click->papers#submit">Submit</button>
         </div>
-        <button id="submit-button" class="bg-indigo-400 hover:bg-indigo-500  px-4 py-2 rounded-md font-bold text-black" data-action="click->papers#submit">Submit</button>
       </div>
     <% end %>
   <% end %>
 </div>
-<div id="preloader" class="fixed top-0 left-0 z-50 w-screen h-screen hidden justify-center items-center bg-black bg-opacity-80  pointer-events-none ">
-  <svg class="spinner-ring spinner-secondary spinner-xl" viewBox="25 25 50 50" stroke-width="10">
+<div id="preloader" class="fixed top-0 left-0 z-50 w-screen h-screen hidden justify-center items-center bg-black bg-opacity-40  pointer-events-none ">
+  <svg class="spinner-ring spinner-secondary spinner-xl" viewBox="25 25 50 50" stroke-width="8">
     <circle cx="50" cy="50" r="20" />
   </svg>
 </div>

@@ -1,0 +1,5 @@
+<tbody id="questions">
+  <% questions.each_with_index do |question,index| %>
+    <%= render 'questions/question', question:question,index: index+1 %>
+  <% end %>
+</tbody>

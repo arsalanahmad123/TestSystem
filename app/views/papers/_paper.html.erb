@@ -1,6 +1,8 @@
 <div class="accordion" dom_id="paper-<%= paper.id %>">
   <input type="checkbox" id="paper-<%= paper.id %>" class="accordion-toggle" />
-  <label for="paper-<%= paper.id %>" class="accordion-title"><%= paper.title %></label>
+  <label for="paper-<%= paper.id %>" class="accordion-title"><%= paper.title %>
+    <span class="text-sm text-indigo-600 text-center"><%= paper.allowed? ? "Allowed -> You can start solving paper" : "Currently not allowed " %></span>
+  </label>
   <span class="accordion-icon">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path></svg>
   </span>
@@ -12,7 +14,9 @@
         <%= link_to "Delete",paper_path(paper),data: {turbo_method: :delete,turbo_confirm: "Are you sure?"},class: "btn btn-sm font-bold text-red-500 hover:text-red-700" %>
       <% end %>
       <span class="font-medium"><%= paper.minutes %> minutes</span>
-      <%= link_to "Start Paper",startpaper_path(paper),class: "btn btn-sm font-bold text-indigo-500 hover:text-indigo-700" %>
+      <% if paper.allowed? %>
+        <%= link_to "Start Paper",startpaper_path(paper),class: "btn btn-sm font-bold text-indigo-500 hover:text-indigo-700" %>
+      <%  end %>
     </div>
   </div>
 </div>

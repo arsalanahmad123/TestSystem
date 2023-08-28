@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 
     def restrict_user 
         if current_user 
-            redirect_to papers_path, notice: "You are already logged in"
+            redirect_to papers_path
         end
     end
 

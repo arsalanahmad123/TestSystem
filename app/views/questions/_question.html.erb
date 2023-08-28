@@ -6,4 +6,14 @@
   <td><%= question.choice3 %></td>
   <td><%= question.choice4 %></td>
   <td><%= question.correct_option %></td>
+  <td>
+    <%= link_to  paper_question_path(question.paper,question),data: {
+      turbo_method: "delete",
+      turbo_confirm: "Are you sure?"
+    } do %>
+      <span class="text-red-500 hover:text-red-600">
+        <i class="material-icons">delete</i>
+      </span>
+    <% end %>
+  </td>
 </tr>
