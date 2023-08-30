@@ -1,0 +1,35 @@
+<div class="flex flex-col justify-center items-center">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-header">Profile info</h2>
+      <div class="flex flex-row justify-between items-center">
+        <span class="font-bold">Username:</span>
+        <span><%= @user.username %></span>
+      </div>
+      <div class="flex flex-row justify-between items-center">
+        <span class="font-bold">Email:</span>
+        <span><%= @user.email %></span>
+      </div>
+      <div class="flex flex-row justify-between items-center">
+        <span class="font-bold">Solved Papers:</span>
+        <span><%= @papers.count %></span>
+      </div>
+    </div>
+  </div>
+  <div class="bg-gradient-to-bl from-indigo-400 to-indigo-950 m-4 rounded text-white w-[480px] mx-auto">
+    <h1 class="text-center text-2xl font-bold mb-4 mt-2">Solved Papers</h1>
+    <% if @papers.empty? %>
+      <div class="p-5 text-center">
+        You haven't solved any papers yet.
+      </div>
+    <% end %>
+    <div class="p-5">
+      <% @papers.each do |paper| %>
+        <div class="flex flex-row justify-between items-center">
+          <span class="font-bold text-white"><%= paper.title %></span>
+          <span class="font-medium text-white">You Scored:  <%= @user.find_score(paper) %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

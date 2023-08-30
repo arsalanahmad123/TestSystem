@@ -2,12 +2,9 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="flash"
 export default class extends Controller {
-  static targets = ["closeIcon"]
+  static targets = ["close"]
   connect() {
-  }
-
-  initialize() {
-    this.closeIconTarget.setAttribute("data-action", "click->flash#removeMessage");
+    this.closeTarget.addEventListener("click", this.removeMessage.bind(this));
   }
 
   removeMessage() {

@@ -1,21 +1,21 @@
 <div class="flex flex-col mx-auto gap-y-14 justify-center items-center mt-20 overflow-x-hidden">
   <ol class="steps steps-vertical lg:steps-horizontal lg:ml-60">
     <li class="step">
-      <div class="step-circle bg-indigo-100">1</div>
-      <h3 class="font-medium">Login</h3>
+      <div class="step-circle bg-indigo-100 dark:bg-slate-950 dark:text-white font-bold dark:border-slate-950">1</div>
+      <h3 class="font-bold dark:text-white">Login/Sigup</h3>
     </li>
     <li class="step">
-      <div class="step-circle bg-indigo-100">2</div>
-      <h3 class="font-medium">Solve the Paper</h3>
+      <div class="step-circle bg-indigo-100 dark:bg-slate-950 dark:text-white font-bold dark:border-slate-950">2</div>
+      <h3 class="font-bold dark:text-white">Solve the Paper</h3>
     </li>
     <li class="step">
-      <div class="step-circle bg-indigo-100">3</div>
-      <h3 class="font-medium">Submit</h3>
+      <div class="step-circle bg-indigo-100 dark:bg-slate-950 dark:text-white font-bold dark:border-slate-950">3</div>
+      <h3 class="font-bold dark:text-white">Submit</h3>
     </li>
   </ol>
   <div class="flex justify-center items-center flex-col">
-    <div class="mt-5 shadow-lg rounded shadow-indigo-300 mb-10 p-20">
-      <%= turbo_frame_tag "login" do %>
+    <div class="mt-5  mb-10">
+      <%= turbo_frame_tag "login",data: {controller: "loader"} do %>
         <%= render 'sessions/form' %>
       <% end %>
     </div>

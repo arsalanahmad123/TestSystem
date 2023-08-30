@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_action :require_admin,only: [:verify_user]
     before_action :restrict_user,only: [:new,:create]
+    before_action :require_user,only: [:profile]
     def new 
         @user = User.new
     end
@@ -30,17 +31,22 @@ class UsersController < ApplicationController
 
     def create 
         @user = User.new(user_params)
-        if current_user 
-            logout 
-            login(user)
-            redirect_to papers_path,notice: "Welcome !"
-        end
+            login(@user)
         if @user.save 
             redirect_to papers_path
             flash[:success] = "Welcome #{@user.username}!"
         else 
             redirect_to root_path
             flash[:error] ="#{@user.errors.full_messages.join(', ')}"
+        end
+    end
+
+    def profile 
+        @user = current_user
+        @scores = @user.scores 
+        @papers = []
+        @scores.each do |score|
+            @papers << score.paper
         end
     end
 

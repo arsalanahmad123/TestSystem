@@ -85,6 +85,7 @@ export default class extends Controller {
       if (remainingTime < 0) {
         countdownTimer.textContent = "Time's up!";
         clearInterval(this.countdownInterval);
+        this.paperFormTarget.submit();
       }
     }, 1000); // Update every second
   }

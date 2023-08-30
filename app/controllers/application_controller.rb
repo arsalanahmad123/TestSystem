@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
     def require_approved_user 
         unless current_user && current_user.allowed? || current_user.admin? 
-            flash[:error] = "You must be approved to access this section.Kindly contact your administrator"
+            flash[:error] = "Currently you are not approved kindly contact the administration"
             redirect_to request.referrer || root_path
         end
     end

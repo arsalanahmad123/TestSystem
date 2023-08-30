@@ -5,7 +5,7 @@
       <%= link_to "New Paper",new_paper_path, class: "btn btn-solid-primary font-bold text-[18px]",data: {turbo_frame: "new-paper",turbo_method: "get"} %>
     <% end %>
   </div>
-  <div class="accordion-group accordion-group-bordered" id="papers">
+  <div class="accordion-group accordion-group-hover accordion-group-bordered" id="papers">
     <%= render @papers %>
   </div>
   <%= turbo_frame_tag "new-paper",class: "mb-10 mt-10" do %>

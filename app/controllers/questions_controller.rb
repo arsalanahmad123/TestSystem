@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
     before_action :set_paper, only: [:new, :create,:destroy]
+    before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
     def new 
         @question = @paper.questions.build 
     end

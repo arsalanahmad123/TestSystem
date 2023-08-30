@@ -1,12 +1,9 @@
-<div class="accordion" dom_id="paper-<%= paper.id %>">
+<div class="accordion accordion-open hover:cursor-default" dom_id="paper-<%= paper.id %>">
   <input type="checkbox" id="paper-<%= paper.id %>" class="accordion-toggle" />
-  <label for="paper-<%= paper.id %>" class="accordion-title"><%= paper.title %>
-    <span class="text-sm text-indigo-600 text-center"><%= paper.allowed? ? "Allowed -> You can start solving paper" : "Currently not allowed " %></span>
+  <label for="paper-<%= paper.id %>" class="accordion-title flex flex-col justify-start items-start"><%= paper.title %>
+    <span class="badge <%= paper.allowed? ? "badge-success" : "badge-error" %>"><%= paper.allowed? ? "Allowed" : "Not Allowed " %></span>
   </label>
-  <span class="accordion-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path></svg>
-  </span>
-  <div class="accordion-content text-content2">
+  <div class="accordion-content">
     <div class="min-h-0 flex justify-between items-center flex-wrap gap-2">
       <span class="font-medium"><%= paper.description %></span>
       <% if current_user && current_user.admin? %>

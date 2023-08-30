@@ -4,7 +4,7 @@
 <div id="question-container" data-controller ="papers" data-questions-current-index="0" data-papertime = "<%= @paper.minutes %>" class="overflow-x-hidden">
   <%= form_for startpaper_path,data: {papers_target: "paperForm"} do |r| %>
     <input type="hidden" name="paper_id" value="<%= @paper.id %>">
-    <div class="absolute top-30 z-50 right-10 bg-slate-700 text-white font-bold p-5 rounded-2xl text-[19px] hover:shadow-xl hover:shadow-indigo-500 cursor-crosshair" data-papers-target="countdown-timer"></div>
+    <div class="absolute top-30 z-50 right-10 bg-slate-700 text-white font-bold p-5 rounded-2xl text-[19px] hover:shadow-xl hover:shadow-indigo-500 cursor-not-allowed" data-papers-target="countdown-timer"></div>
     <% @questions.each_with_index do |q,index| %>
       <div class="question relative p-10 bg-slate-200 rounded-lg animate__animated animate__bounceInRight w-full h-full"  data-papers-target="question">
         <div class="mb-4">

@@ -74,8 +74,8 @@ class PapersController < ApplicationController
                     @score = @score + 1
                 end 
         end
-        score = Score.find_or_initialize_by(paper_id: @paper.id, user_id: @user.id,total_question_count: @paper.questions.count)
-        score.update(score: @score)
+        score = Score.find_or_initialize_by(paper_id: @paper.id, user_id: @user.id)
+        score.update(score: @score,total_question_count: @questions.count)
         redirect_to resultpage_path(@paper)
     end
 

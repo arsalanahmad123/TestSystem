@@ -4,6 +4,7 @@ class User < ApplicationRecord
     validates :username,presence: true 
     has_many :responses,dependent: :destroy
     has_many :scores,dependent: :destroy
+    validates :password,length: {minimum:6, allow_nil: true}
 
     enum role: [:student, :admin]
     after_initialize :set_default_role, :if => :new_record?
@@ -13,5 +14,9 @@ class User < ApplicationRecord
     end
 
     scope :all_except, -> (user) { where.not(id: user) }
+
+    def find_score(paper)
+        scores.find_by(paper_id: paper.id).try(:score)
+    end
     
 end
