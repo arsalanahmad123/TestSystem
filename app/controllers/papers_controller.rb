@@ -19,14 +19,7 @@ class PapersController < ApplicationController
     def create 
         @paper = Paper.new(paper_params)
         if @paper.save
-            respond_to do |format|
-                format.turbo_stream{
-                    render turbo_stream: 
-                    [turbo_stream.prepend("papers", @paper),
-                        turbo_stream.replace("new-paper",partial: "papers/form",locals: {paper: Paper.new})
-                    ]
-                }
-            end
+            redirect_to papers_path, notice: "Paper was successfully created."
         else
             render 'new', :status => :unprocessable_entity
         end
@@ -55,38 +48,40 @@ class PapersController < ApplicationController
 
 
     def paperstart 
-        @paper = Paper.friendly.find(params[:id])
+        @paper = Paper.friendly.includes(:questions).find(params[:id])
         @questions = @paper.questions 
     end
 
-    def submitPaper 
+    def submitPaper
         @paper = Paper.find(params[:paper_id])
         @questions = @paper.questions
         @user = current_user
         @score = 0
+
+        question_ids = @questions.map(&:id)
+
+        # Fetch all responses for the current user and the questions in one query
+        responses = Response.where(user_id: current_user.id, question_id: question_ids).index_by(&:question_id)
+
         @questions.each do |question|
-            selected_answer = params["choice-#{question.id}"] if params["choice-#{question.id}"]
-            selected_answer = selected_answer.to_i
-            response = Response.find_or_initialize_by(user_id: @user.id,question_id: question.id)
-                response.update(choice: selected_answer.to_i)
-                
-                if  selected_answer == question.correct_option
-                    @score = @score + 1
-                end 
+            selected_answer = params["choice-#{question.id}"].to_i
+            response = responses[question.id] || Response.new(user_id: current_user.id, question_id: question.id)
+
+            response.update(choice: selected_answer)
+            @score += 1 if selected_answer == question.correct_option
         end
-        score = Score.find_or_initialize_by(paper_id: @paper.id, user_id: @user.id)
-        score.update(score: @score,total_question_count: @questions.count)
+
+        score = Score.find_or_initialize_by(paper_id: @paper.id, user_id: current_user.id)
+        score.update(score: @score, total_question_count: @questions.count)
         redirect_to resultpage_path(@paper)
     end
+
+
 
     def resultpage
         @questions = @paper.questions
         @score = Score.find_by(paper_id: @paper.id,user_id: current_user.id)
-        @responses = []
-        @questions.each do |question|
-            response = Response.find_by(user_id: current_user.id,question_id: question.id)
-            @responses << response 
-        end
+        @responses = Response.where(user_id: current_user.id, question_id: @questions.map(&:id))
     end
 
     def allowpaper 

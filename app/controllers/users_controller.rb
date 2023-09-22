@@ -31,8 +31,8 @@ class UsersController < ApplicationController
 
     def create 
         @user = User.new(user_params)
-            login(@user)
         if @user.save 
+            login(@user)
             redirect_to papers_path
             flash[:success] = "Welcome #{@user.username}!"
         else 

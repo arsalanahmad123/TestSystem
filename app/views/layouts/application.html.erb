@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html >
+<html class="relative scroll-smooth">
   <head>
-    <title>PAF</title>
+    <title>IkramForcesAcademy</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,19 +14,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   </head>
-  <body class="font-quicksand dark:bg-slate-900 bg-white">
+  <body class="font-quicksand dark:bg-slate-900 bg-white relative m-0 p-0">
     <%= render 'layouts/navbar' %>
-    <main class="container mx-auto mt-10">
-      <%= yield %>
-      <%= render 'layouts/flash' %>
-      <div id="frame-preloader" class="hidden">
-        <div class="spinner-wave fixed top-0 left-0 z-50 w-screen h-screen  justify-center items-center bg-black bg-opacity-40  pointer-events-none">
-          <div class="spinner-wave-dot spinner-dot-intermittent"></div>
-          <div class="spinner-wave-dot spinner-dot-intermittent"></div>
-          <div class="spinner-wave-dot spinner-dot-intermittent"></div>
-          <div class="spinner-wave-dot spinner-dot-intermittent"></div>
-        </div>
-      </div>
-    </main>
+    <%= yield %>
+    <%= render 'layouts/flash' %>
   </body>
 </html>

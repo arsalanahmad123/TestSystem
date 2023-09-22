@@ -10,9 +10,6 @@ application.register("flash", FlashController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import LoaderController from "./loader_controller"
-application.register("loader", LoaderController)
-
 import MenuController from "./menu_controller"
 application.register("menu", MenuController)
 

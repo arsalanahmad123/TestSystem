@@ -1,13 +1,47 @@
-<div class="flex flex-col mt-5">
+<div class="flex flex-col mt-14 w-[90%] mx-auto h-screen">
   <div class="flex flex-row justify-between items-center">
-    <h1 class="text-center text-5xl mb-10 font-extrabold text-indigo-500">Papers</h1>
+    <h1 class="text-center text-5xl mb-10 font-extrabold text-indigo-500 dark:text-indigo-400">Papers</h1>
     <% if current_user && current_user.admin? %>
-      <%= link_to "New Paper",new_paper_path, class: "btn btn-solid-primary font-bold text-[18px]",data: {turbo_frame: "new-paper",turbo_method: "get"} %>
+      <button class="font-bold text-sm bg-indigo-500 text-white px-3 py-1 rounded-lg" id="newpaper">New Paper</button>
     <% end %>
   </div>
-  <div class="accordion-group accordion-group-hover accordion-group-bordered" id="papers">
+  <div class="accordion-group accordion-group-hover accordion-group-bordered bg-slate-200" id="papers">
     <%= render @papers %>
   </div>
-  <%= turbo_frame_tag "new-paper",class: "mb-10 mt-10" do %>
+</div>
+<%# form for creating new paper  %>
+<div class="hidden flex-col items-center justify-items-center backdrop-blur-sm bg-white rounded-2xl shadow shadow-indigo-500 p-5 w-[90%] md:w-[50vw] absolute top-28 left-12 sm:left-[230px] md:left-[340px] overflow-hidden" id="paperForm">
+  <h1 class="text-center text-indigo-500 font-bold text-3xl mb-5">Create new Paper</h1>
+  <%= form_for @paper do |p| %>
+    <div class="mb-5 w-full">
+      <label for="title" class="block text-indigo-700 font-semibold">Title</label>
+      <%= p.text_field :title, class: "block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg", required: true %>
+    </div>
+    <div class="mb-5">
+      <label for="description" class="block text-indigo-700 font-semibold">Description</label>
+      <%= p.text_area :description, class: "block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg", required: true %>
+    </div>
+    <div class="mb-5">
+      <label for="minutes" class="block text-indigo-700 font-semibold">Total minutes for solving</label>
+      <%= p.number_field :minutes, class: "block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg", required: true %>
+    </div>
+    <div class="mb-5 flex justify-between items-center flex-wrap gap-3">
+      <%= p.submit "Create", class: "btn btn-solid-primary font-bold text-[18px]" %>
+      <span class="font-bold dark:text-slate-950">OR</span>
+      <button class="btn btn-solid-primary font-bold text-[18px]" id="cancel-paper">Cancel</button>
+    </div>
   <% end %>
 </div>
+<script>
+  document.addEventListener("turbo:load", () => {
+    const paperForm = document.getElementById("newpaper");
+    paperForm.addEventListener("click", () => {
+      document.getElementById("paperForm").classList.remove("hidden");
+      document.getElementById("paperForm").classList.add("flex");
+    })
+    const cancelPaper = document.getElementById("cancel-paper");
+    cancelPaper.addEventListener("click", () => {
+      document.getElementById("paperForm").classList.add("hidden");
+    })
+  })
+</script>

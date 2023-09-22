@@ -13,4 +13,17 @@ document.addEventListener("turbo:load", function () {
         modalFrame.classList.toggle("hidden");
     });
 
+    function detectDarkMode() {
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const html = document.querySelector('html');
+
+        if (prefersDarkMode) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+    }
+
+    // Call the detectDarkMode function when needed
+    detectDarkMode();
 });

@@ -1,4 +1,3 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   darkMode: "class",
@@ -12,6 +11,16 @@ module.exports = {
     extend: {
       fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
+      },
+      animation: {
+        'rotate-slow': 'rotate 1s linear infinite',
+        'pulse-slow': 'pulse 1s linear infinite',
+      },
+      borderRadius: {
+        'custom-radius': '43% 57% 63% 37% / 34% 78% 22% 66% '
+      },
+      shadow: {
+        'custom-shadow': '0px 20px 30px rgba(0, 0, 0, 0.1)',
       },
     },
   },

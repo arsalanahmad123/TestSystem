@@ -1,21 +1,23 @@
 <% if @paper.questions.empty? %>
   <h1 class="bg-red-100 p-10 text-red-500 font-bold text-5xl rounded-md">No questions</h1>
 <% end %>
-<div id="question-container" data-controller ="papers" data-questions-current-index="0" data-papertime = "<%= @paper.minutes %>" class="overflow-x-hidden">
+<div id="question-container" data-controller ="papers" data-questions-current-index="0" data-papertime = "<%= @paper.minutes %>" class="overflow-x-hidden h-screen">
   <%= form_for startpaper_path,data: {papers_target: "paperForm"} do |r| %>
     <input type="hidden" name="paper_id" value="<%= @paper.id %>">
-    <div class="absolute top-30 z-50 right-10 bg-slate-700 text-white font-bold p-5 rounded-2xl text-[19px] hover:shadow-xl hover:shadow-indigo-500 cursor-not-allowed" data-papers-target="countdown-timer"></div>
+    <% if !@paper.questions.empty? %>
+      <div class="absolute lg:top-30 top-24 z-50 lg:right-10 right-5 bg-slate-700 text-white font-bold lg:p-3 rounded-2xl lg:text-[17px] hover:shadow-xl hover:shadow-indigo-500 cursor-not-allowed text-[15px] p-3" data-papers-target="countdown-timer"></div>
+    <% end %>
     <% @questions.each_with_index do |q,index| %>
       <div class="question relative p-10 bg-slate-200 rounded-lg animate__animated animate__bounceInRight w-full h-full"  data-papers-target="question">
         <div class="mb-4">
           <h1 class="lg:text-5xl text-4xl text-indigo-500 font-bold">Q<%= index + 1 %>.<%= q.content %>?</h1>
         </div>
         <label class="flex cursor-pointer gap-2 py-5 text-slate-950 font-semibold text-[17px]">
-          <input type="radio" name="choice-<%= q.id %>" value="1" class="radio radio-xl" data-action="click->papers#checkRadio" >
+          <input type="radio" name="choice-<%= q.id %>" value="1" class="radio radio-xl " data-action="click->papers#checkRadio" >
           <%= q.choice1 %>
         </label>
         <label class="flex cursor-pointer gap-2 py-5 text-slate-950 font-semibold text-[17px]">
-          <input type="radio" name="choice-<%= q.id %>" value="2" class="radio radio-xl" data-action="click->papers#checkRadio"
+          <input type="radio" name="choice-<%= q.id %>" value="2" class="radio radio-xl " data-action="click->papers#checkRadio"
           >
           <%= q.choice2 %>
         </label>
@@ -31,13 +33,15 @@
         </label>
         <div class="mb-4 mt-10 flex justify-between sm:flex-wrap">
           <div class="flex">
-            <button id="prev-button" class="bg-slate-300 px-4 py-2 mr-2 rounded-md font-bold" data-action="click->papers#prev" >Previous</button>
-            <button id="next-button" class="bg-slate-300 px-4 py-2 rounded-md font-bold" data-action="click->papers#next">Next</button>
+            <button id="prev-button" class="bg-slate-300 px-4 py-2 mr-2 rounded-md font-bold dark:bg-slate-800 dark:text-white" data-action="click->papers#prev" >Previous</button>
+            <button id="next-button" class="bg-slate-300 px-4 py-2 rounded-md font-bold dark:bg-slate-800 dark:text-white" data-action="click->papers#next">Next</button>
           </div>
         </div>
       </div>
     <% end %>
-    <button id="submit-button" class="bg-gradient-to-br from-indigo-100 to-indigo-300 px-4 py-2 rounded-md font-extrabold absolute bottom-12 right-12 hover:shadow-2xl hover:shadow-indigo-950" data-action="click->papers#submit">Submit</button>
+    <% if !@paper.questions.empty? %>
+      <button id="submit-button" class="bg-gradient-to-br from-indigo-100 to-indigo-300 px-4 py-2 rounded-md font-extrabold absolute lg:bottom-12 lg:right-12 hover:shadow-2xl hover:shadow-indigo-950 dark:bg-gradient-to-tr dark:from-indigo-400 dark:to-indigo-500 bottom-7 right-5" data-action="click->papers#submit">Submit</button>
+    <% end %>
   <% end %>
 </div>
 <div id="preloader" class="fixed top-0 left-0 z-50 w-screen h-screen hidden justify-center items-center bg-black bg-opacity-40  pointer-events-none ">

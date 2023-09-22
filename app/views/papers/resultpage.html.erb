@@ -1,48 +1,48 @@
-<div class="bg-slate-100 shadow-xl p-10 shadow-indigo-200 animate__animated animate__fadeInBottomRight mb-10 rounded-md w-[90%] mx-auto">
-  <h1 class="text-6xl font-extrabold mt-10 text-center text-slate-950 italic">Result</h1>
-  <div class="mt-10  bg-gradient-to-tr from-slate-100 to-slate-300 p-2 rounded-md w-fit ml-auto text-slate-950 shadow-slate-900 shadow-2xl">
+<div class="bg-slate-100 shadow-xl p-10 shadow-indigo-200 animate__animated animate__fadeInBottomRight mb-10 rounded-md w-[90%] mx-auto dark:bg-slate-900 dark:text-white dark:shadow-slate-700 mt-12">
+  <h1 class="text-6xl font-extrabold mt-10 text-center text-slate-950 italic dark:text-white">Result</h1>
+  <div class="mt-10  bg-gradient-to-tr from-slate-100 to-slate-300 p-2 rounded-md w-fit ml-auto text-slate-950 shadow-slate-900 shadow-2xl dark:from-slate-700 dark:to-slate-800 dark:text-white">
     <span class="text-[18px] px-4 py-2">You got <span class="font-bold text-[20px]"><%= @score.score %></span> out of <span class="font-bold text-[20px]"><%= @score.total_question_count %></span>
     </span>
   </div>
   <div class="mt-10 mb-10">
-    <h1 class="text-4xl text-slate-950 font-bold">Questions:</h1>
+    <h1 class="text-4xl text-slate-950 font-bold dark:text-white">Questions:</h1>
   </div>
   <% @questions.each_with_index do |question, index| %>
     <div class="mt-5 flex flex-col gap-y-5">
-      <div class="bg-slate-300 p-3 rounded-xl shadow-xl text-slate-950">
+      <div class="bg-slate-300 p-3 rounded-xl shadow-xl text-slate-950 dark:bg-slate-800 dark:text-white">
         <span class="font-bold text-[20px]">Q.<%= index+1 %> <%= question.content %>?</span>
       </div>
       <div class="flex flex-col">
         <% # Get the user's response for this question %>
         <% user_response = @responses.find { |response| response.question_id == question.id } %>
         <span class="<%= 'text-green-500 font-extrabold' if user_response && user_response.choice.to_i == question.correct_option && user_response.choice.to_i ==1  %> <%= 'text-red-500 font-extrabold' if user_response && user_response.choice.to_i != question.correct_option && user_response.choice.to_i ==1   %>">
-          <span class="flex flex-row gap-2 font-bold">
+          <span class="flex flex-row gap-2 font-bold ">
             <span >1.</span>
             <%= question.choice1 %>
           </span>
         </span>
         <span class="<%= 'text-green-500 font-extrabold' if user_response && user_response.choice.to_i == question.correct_option && user_response.choice.to_i ==2 %><%= 'text-red-500 font-extrabold' if user_response && user_response.choice.to_i != question.correct_option && user_response.choice.to_i ==2   %> ">
-          <span class="flex flex-row gap-2 font-bold">
+          <span class="flex flex-row gap-2 font-bold ">
             <span >2.</span>
             <%= question.choice2 %>
           </span>
         </span>
         <span class="<%= 'text-green-500 font-extrabold' if user_response && user_response.choice.to_i == question.correct_option && user_response.choice.to_i ==3  %> <%= 'text-red-500 font-extrabold' if user_response && user_response.choice.to_i != question.correct_option && user_response.choice.to_i ==3   %> ">
-          <span class="flex flex-row gap-2 font-bold">
+          <span class="flex flex-row gap-2 font-bold ">
             <span >3.</span>
             <%= question.choice3 %>
           </span>
         </span>
         <span class="<%= 'text-green-500 font-extrabold' if user_response && user_response.choice.to_i == question.correct_option && user_response.choice.to_i ==4  %> <%= 'text-red-500 font-extrabold' if user_response && user_response.choice.to_i != question.correct_option && user_response.choice.to_i ==4   %> ">
-          <span class="flex flex-row gap-2 font-bold">
+          <span class="flex flex-row gap-2 font-bold ">
             <span >4.</span>
             <%= question.choice4 %>
           </span>
         </span>
       </div>
       <div class="flex justify-end items-center">
-        <span class="font-bold text-[20px] mt-5">
-          <div class="flex flex-row justify-center items-center text-success">
+        <span class="font-bold lg:text-[20px] mt-5 text-xs dark:bg-slate-800 p-2 rounded-lg">
+          <div class="flex flex-row justify-center items-center text-success ">
             <% if user_response && user_response.choice.to_i == question.correct_option  %>
               <i class="material-icons">check_circle</i>
               Correct 
