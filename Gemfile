@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.7"
+gem "rails", "~> 7.0.8"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -61,6 +61,7 @@ group :development do
   gem "web-console"
   gem "bullet"
 
+gem "byebug", "~> 11.1"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -82,4 +83,3 @@ gem "bcrypt", "~> 3.1"
 
 gem "friendly_id", "~> 5.5"
 
-gem "byebug", "~> 11.1"
