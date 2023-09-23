@@ -42,7 +42,7 @@
       </div>
       <div class="flex justify-end items-center">
         <span class="font-bold lg:text-[20px] mt-5 text-xs dark:bg-slate-800 p-2 rounded-lg">
-          <div class="flex flex-row justify-center items-center text-success ">
+          <div class="flex flex-row justify-center items-center text-success">
             <% if user_response && user_response.choice.to_i == question.correct_option  %>
               <i class="material-icons">check_circle</i>
               Correct 
@@ -50,7 +50,7 @@
           </div>
           <% if user_response && user_response.choice.to_i != question.correct_option %>
             <div class="flex flex-col justify-center items-start text-error">
-              <div class="flex flex-row">
+              <div class="flex flex-row justify-center items-center">
                 <i class="material-icons">dangerous</i>
                 Wrong
               </div>

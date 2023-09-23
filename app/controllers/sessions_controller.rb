@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
             redirect_to papers_path
         else
             flash[:error] = "Invalid email/password combination"
-            redirect_to root_path
+            render :new, status: :unprocessable_entity, notice: "Invalid email/password combination"
         end
     end
 

@@ -1,14 +1,14 @@
-<div class="container flex flex-col flex-wrap md:flex-row md:flex-nowrap   justify-center gap-x-32 items-center mx-auto">
-  <div class="p-4 lg:mb-28 lg:w-[45vw] w-full mt-10 lg:mt-0 lg:ml-20">
-    <h1 class="text-7xl font-bold bg-gradient-to-b from-indigo-200 to-indigo-700 bg-clip-text drop-shadow-2xl  text-transparent">Excellence Starts Here
+<div class="container flex flex-col flex-wrap md:flex-row md:flex-nowrap   justify-center gap-x-32 items-center mx-auto min-h-screen">
+  <div class="p-4 lg:mb-28 lg:w-[45vw] w-full mt-10 ">
+    <h1 class="text-7xl font-bold bg-gradient-to-b from-custom-primary to-custom-secondary bg-clip-text drop-shadow-2xl  text-transparent">Excellence Starts Here
     </h1>
     <p class="text-xl mt-10 w-[80vw] lg:w-[32vw]">
       Elevate your child's potential at <b> Ikramforcesacademy</b>
       . We provide exceptional education, fostering leadership, and confidence. Join us for a brighter future.
     </p>
     <a href="#about" class="relative inline-block px-4 py-2 font-medium group mt-10 ">
-      <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-indigo-700 group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-      <span class="absolute inset-0 w-full h-full bg-white border-2 border-indigo-600 group-hover:bg-indigo-700"></span>
+      <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-custom-primary group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+      <span class="absolute inset-0 w-full h-full bg-white border-2 border-custom-primary group-hover:bg-custom-primary"></span>
       <span class="relative text-black group-hover:text-white">Learn About Us</span>
     </a>
   </div>
@@ -40,55 +40,42 @@
     }
     }
   </style><defs><linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%"><stop offset="5%" stop-color="#4338ca"></stop><stop offset="95%" stop-color="#ffffff"></stop></linearGradient></defs><path d="M 0,700 C 0,700 0,350 0,350 C 117.4736842105263,394.25837320574163 234.9473684210526,438.51674641148327 335,463 C 435.0526315789474,487.48325358851673 517.6842105263158,492.1913875598086 596,470 C 674.3157894736842,447.8086124401914 748.3157894736843,398.7177033492823 832,379 C 915.6842105263157,359.2822966507177 1009.0526315789473,368.9377990430622 1112,369 C 1214.9473684210527,369.0622009569378 1327.4736842105262,359.5311004784689 1440,350 C 1440,350 1440,700 1440,700 Z" stroke="none" stroke-width="0" fill="url(#gradient)" fill-opacity="1" class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 350)"></path></svg>
-<section id="about" class="relative group mt-[-110px]">
-  <div class="flex justify-between items-center lg:flex-row flex-col w-[95vw]">
+<section id="about" class="relative group lg:mt-[-110px] min-h-screen">
+  <div class="flex justify-between items-center lg:flex-row flex-col w-[95vw] flex-wrap lg:flex-nowrap">
     <div class="lg:w-[50vw] w-full">
       <%= image_tag "aboutus.png", class: "w-full h-full object-contain" %>
     </div>
-    <div class="lg:w-[50vw] w-full h-full">
-      <h1 class="text-6xl font-bold text-indigo-700 text-end">
+    <div class="lg:w-[50vw] w-full h-full mt-10 lg:mt-0">
+      <h1 class="lg:text-6xl font-bold text-custom-primary text-end text-5xl">
         Our Inspiring Journey
       </h1>
-      <p class="text-xl mt-10 w-[90%] text-end mx-auto font-medium">
+      <p class="lg:text-xl mt-10 w-[90%] text-end mx-auto font-medium text-medium">
         Welcome to Ikram Forces Academy, where excellence is our tradition. With over a decade of dedicated service in cadet coaching, we have proudly achieved an astounding 80% success rate. Our commitment extends beyond knowledge — we are passionate about fostering leadership and unwavering self-assurance in our students. Join us today and embark on a transformative journey toward a brighter, more promising future.
       </p>
     </div>
   </div>
 </section>
-<section id="gallery" class="py-16">
-  <div class="container mx-auto">
-    <h2 class="text-3xl font-semibold text-center mb-8">Our Gallery</h2>
-    <!-- Gallery Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <!-- Gallery Item 1 -->
-      <div class="relative group">
-        <img src="https://picsum.photos/200/300" alt="Gallery Image 1" class="w-full rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
-        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <a href="#" class="text-white text-lg font-semibold">View</a>
-          </div>
+<section id="achievments" class="min-h-screen mt-20 overflow-hidden">
+  <div class="flex justify-start space-x-5 lg:flex-row bg-gradient-to-bl from-indigo-200 to-indigo-700 rounded-custom-radius relative flex-col-reverse lg:flex-nowrap">
+    <div class="flex flex-col ">
+      <h1 class="lg:text-6xl font-bold text-start ml-10 lg:mt-56 text-4xl">
+        Our Achievements
+      </h1>
+      <div class="flex flex-col lg:justify-end lg:items-end justify-center items-center absolute lg:top-96 lg:left-96 top-80 left-28">
+        <div class="lg:bg-white bg-custom-primary rounded-lg p-5 mt-20 relative lg:w-[480px] w-[200px]">
+          <%= image_tag "siren3d.png", class: "lg:w-[80px] lg:h-[80px] w-[40px] h-[40px] absolute top-[-32px] left-[-32px] opacity-90" %>
+          <h1 class="lg:text-3xl text-end text-lg">High Success Rate</h1>
+        </div>
+        <div class="lg:bg-white rounded-lg p-5 mt-20 relative lg:w-[480px] w-[200px] bg-custom-primary">
+          <%= image_tag "3d-book.png", class: "lg:w-[120px] lg:h-[120px] w-[60px] h-[60px] absolute top-[-38px] left-[-38px] opacity-90" %>
+          <h1 class="lg:text-3xl text-lg text-end">Placement Opportunities</h1>
+        </div>
+        <div class="lg:bg-white rounded-lg p-5 mt-20 relative lg:w-[480px] bg-custom-primary w-[200px]">
+          <%= image_tag "3d-light-bulb.png", class: "lg:w-[120px] lg:h-[120px] transform rotate-[30deg] absolute top-[-38px] left-[-38px] opacity-90 w-[60px] h-[60px]" %>
+          <h1 class="lg:text-3xl text-end text-lg">Top-Notch Education System</h1>
         </div>
       </div>
-      <!-- Gallery Item 2 -->
-      <div class="relative group">
-        <img src="https://picsum.photos/200/300" alt="Gallery Image 2" class="w-full rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
-        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <a href="#" class="text-white text-lg font-semibold">View</a>
-          </div>
-        </div>
-      </div>
-      <!-- Gallery Item 3 -->
-      <div class="relative group">
-        <img src="https://picsum.photos/200/300" alt="Gallery Image 3" class="w-full rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
-        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <a href="#" class="text-white text-lg font-semibold">View</a>
-          </div>
-        </div>
-      </div>
-      <!-- Add more gallery items as needed -->
     </div>
-    <!-- End Gallery Grid -->
+    <%= image_tag "achivement.png", class: "lg:w-full lg:h-full" %>
   </div>
 </section>

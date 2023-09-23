@@ -5,12 +5,12 @@
   <%= form_for startpaper_path,data: {papers_target: "paperForm"} do |r| %>
     <input type="hidden" name="paper_id" value="<%= @paper.id %>">
     <% if !@paper.questions.empty? %>
-      <div class="absolute lg:top-30 top-24 z-50 lg:right-10 right-5 bg-slate-700 text-white font-bold lg:p-3 rounded-2xl lg:text-[17px] hover:shadow-xl hover:shadow-indigo-500 cursor-not-allowed text-[15px] p-3" data-papers-target="countdown-timer"></div>
+      <div class="absolute lg:top-32 top-12 z-50 lg:right-5 right-5 bg-slate-700 text-white font-bold lg:p-3 rounded-2xl lg:text-[15px] hover:shadow-xl hover:shadow-indigo-500 cursor-not-allowed text-[13px] p-3" data-papers-target="countdown-timer"></div>
     <% end %>
     <% @questions.each_with_index do |q,index| %>
       <div class="question relative p-10 bg-slate-200 rounded-lg animate__animated animate__bounceInRight w-full h-full"  data-papers-target="question">
         <div class="mb-4">
-          <h1 class="lg:text-5xl text-4xl text-indigo-500 font-bold">Q<%= index + 1 %>.<%= q.content %>?</h1>
+          <h1 class="lg:text-5xl text-4xl text-indigo-500 font-bold lg:w-[80%]">Q<%= index + 1 %>.<%= q.content %>?</h1>
         </div>
         <label class="flex cursor-pointer gap-2 py-5 text-slate-950 font-semibold text-[17px]">
           <input type="radio" name="choice-<%= q.id %>" value="1" class="radio radio-xl " data-action="click->papers#checkRadio" >

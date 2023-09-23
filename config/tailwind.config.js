@@ -22,6 +22,10 @@ module.exports = {
       shadow: {
         'custom-shadow': '0px 20px 30px rgba(0, 0, 0, 0.1)',
       },
+      colors: {
+        'custom-primary': "#FEAF9E",
+        'custom-secondary': "#FEAF9C"
+      }
     },
   },
   plugins: [

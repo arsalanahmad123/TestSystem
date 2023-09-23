@@ -5,7 +5,7 @@
     <% end %>
   </div>
   <div class="navbar-center hidden lg:flex">
-    <a href="#about" class="nav-item hover:underline">About us</a>
+    <a href="/#about" class="nav-item hover:underline">About us</a>
     <% if logged_in? %>
       <% if current_user.admin? %>
         <%= link_to "Papers",papers_path,class: "btn btn-ghost font-bold dark:text-white dark:bg-slate-900" %>
