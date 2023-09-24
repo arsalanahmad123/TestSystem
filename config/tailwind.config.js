@@ -23,6 +23,7 @@ module.exports = {
         'custom-shadow': '0px 20px 30px rgba(0, 0, 0, 0.1)',
       },
       colors: {
+        'primary1': "#8094D5",
         'custom-primary': "#FEAF9E",
         'custom-secondary': "#FEAF9C"
       }

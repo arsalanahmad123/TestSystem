@@ -4,8 +4,11 @@
       <h1 class="font-bold lg:text-3xl text-2xl italic text-indigo-500 dark:text-white">IkramForcesAcademy</h1>
     <% end %>
   </div>
-  <div class="navbar-center hidden lg:flex">
+  <div class="navbar-center hidden lg:flex gap-x-3">
     <a href="/#about" class="nav-item hover:underline">About us</a>
+    <a href="/#services" class="nav-item hover:underline">Services</a>
+    <a href="/#whatnew" class="nav-item hover:underline">What's new</a>
+    <a href="/#contact" class="nav-item hover:underline">Contact</a>
     <% if logged_in? %>
       <% if current_user.admin? %>
         <%= link_to "Papers",papers_path,class: "btn btn-ghost font-bold dark:text-white dark:bg-slate-900" %>
@@ -70,6 +73,18 @@
           </li>
           <li class="inline-block p-2 rounded-md hover:bg-indigo-500 hover:text-white transition-all duration-200 hover:cursor-pointer text-sm dark:text-white whitespace-nowrap">
             <%= link_to "Sign Up", new_user_path %>
+          </li>
+          <li class="inline-block p-2 rounded-md hover:bg-indigo-500 hover:text-white transition-all duration-200 hover:cursor-pointer text-sm dark:text-white whitespace-nowrap">
+            <a href="/#about">About us</a>
+          </li>
+          <li class="inline-block p-2 rounded-md hover:bg-indigo-500 hover:text-white transition-all duration-200 hover:cursor-pointer text-sm dark:text-white whitespace-nowrap">
+            <a href="/#services">Services</a>
+          </li>
+          <li class="inline-block p-2 rounded-md hover:bg-indigo-500 hover:text-white transition-all duration-200 hover:cursor-pointer text-sm dark:text-white whitespace-nowrap">
+            <a href="/#whatnew">What's new</a>
+          </li>
+          <li class="inline-block p-2 rounded-md hover:bg-indigo-500 hover:text-white transition-all duration-200 hover:cursor-pointer text-sm dark:text-white whitespace-nowrap">
+            <a href="/#contact">Contact</a>
           </li>
         <% end %>
       </ul>

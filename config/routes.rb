@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   root 'pages#index'
+  # config/routes.rb
+# ...
+
+# Define a catch-all route for 404 errors
+get '*path', to: 'pages#not_found', via: :all
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")e
