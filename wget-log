@@ -1,0 +1,11 @@
+--2023-09-25 11:26:57--  http://rpms.litespeedtech.com/debian/lst_repo.gpg
+Resolving rpms.litespeedtech.com (rpms.litespeedtech.com)... 208.167.239.232
+Connecting to rpms.litespeedtech.com (rpms.litespeedtech.com)|208.167.239.232|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2336 (2.3K) [application/octet-stream]
+Saving to: ‘STDOUT’
+
+-                                   0%[                                                             ]       0  --.-KB/s               -                                 100%[============================================================>]   2.28K  --.-KB/s    in 0s      
+
+2023-09-25 11:26:58 (248 MB/s) - written to stdout [2336/2336]
+

@@ -36,7 +36,7 @@ class UsersController < ApplicationController
             redirect_to papers_path
             flash[:success] = "Welcome #{@user.username}!"
         else 
-            redirect_to root_path
+            redirect_to new_user_path
             flash[:error] ="#{@user.errors.full_messages.join(', ')}"
         end
     end

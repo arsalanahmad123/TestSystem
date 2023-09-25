@@ -1,6 +1,6 @@
 <div class="navbar rounded-md p-5 dark:bg-slate-800 dark:shadow-slate-950 ">
   <div class="navbar-start ">
-    <%= link_to logged_in? ? papers_path : root_path do %>
+    <%= link_to root_path do %>
       <h1 class="font-bold lg:text-3xl text-2xl italic text-indigo-500 dark:text-white">IkramForcesAcademy</h1>
     <% end %>
   </div>
@@ -34,6 +34,7 @@
           <div class="dropdown-menu dropdown-menu-bottom-left">
             <%= link_to "Profile", profile_path,class: "dropdown-item font-bold" %>
             <%= link_to "Logout",logout_path,data:{turbo_method: "delete"},class: "dropdown-item font-bold text-red-500" %>
+            <%= link_to "Papers", papers_path,class: "dropdown-item font-bold" %>
           </div>
         <% end %>
         <% if !logged_in? %>
