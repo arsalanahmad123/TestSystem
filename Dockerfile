@@ -1,20 +1,23 @@
-# Use an official Ruby runtime as a parent image
 FROM ruby:3.1.2
+RUN apt-get update -qq && apt-get install -y nodejs build-essential && \ apt-get libvips && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Set the working directory in the container
-WORKDIR /app
+WORKDIR /rails 
 
-# Copy the Gemfile and Gemfile.lock into the container
+ENV RAILS_LOG_TO_STDOUT="1" \
+    RAILS_SERVE_STATIC_FILES="true" \
+    RAILS_ENV="production" \
+    BUNDLE_WITHOUT="development"
+
 COPY Gemfile Gemfile.lock ./
-
-# Install Ruby dependencies
-RUN bundle install && RAILS_ENV=production rails assets:precompile && RAILS_ENV=production rails db:migrate && RAILS_ENV=production rails db:seed 
-
-# Copy the rest of the application code into the container
+RUN bundle install
 COPY . .
 
-# Expose port 3000 (or the port your app listens on)
-EXPOSE 3000
 
-# Start your application
+RUN bundle exec bootsnap precompile --gemfile app/ lib/ vendor/bundle/
+
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+
+EXPOSE 3000
+# this is the default port rails runs on
 CMD ["rails", "server", "-b", "0.0.0.0"]
