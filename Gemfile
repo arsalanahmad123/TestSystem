@@ -84,5 +84,3 @@ gem "bcrypt", "~> 3.1"
 
 gem "friendly_id", "~> 5.5"
 
-
-gem "passenger", "~> 6.0"
