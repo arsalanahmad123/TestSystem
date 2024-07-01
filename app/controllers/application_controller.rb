@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
     helper_method :current_user,:logged_in?,:login,:logout,:require_admin,:require_approved_user,:restrict_user,:require_user
 
+
     def current_user
       @current_user ||= User.find_by(id: session[:user_id])
     end
@@ -9,6 +10,8 @@ class ApplicationController < ActionController::Base
     def logged_in?
         current_user != nil
     end
+
+
 
     def login(user)
         session[:user_id] = user.id 

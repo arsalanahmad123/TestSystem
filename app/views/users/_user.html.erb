@@ -8,4 +8,16 @@
       <%= user.allowed? ? "Block" : "Verify" %>
     <% end %>
   </td>
+  <% if !user.admin? %>
+    <td>
+      <%= link_to user_path(user),data: {turbo_method: "delete",turbo_confirm: "Are you sure?"} ,class: "flex flex-row justify-center items-center text-indigo-500 hover:text-indigo-600 font-bold" do %>
+        <i class="material-icons">delete</i>
+      <% end %>
+    </td>
+  <% end %>
+  <td>
+    <%= link_to resetpapers_path(user),data: {turbo_method: "delete"},class: "flex flex-row justify-center items-center text-indigo-500 hover:text-indigo-600 font-bold" do %>
+      <span>Reset</span>
+    <% end %>
+  </td>
 </tr>

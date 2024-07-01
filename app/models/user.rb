@@ -5,6 +5,7 @@ class User < ApplicationRecord
     has_many :responses,dependent: :destroy
     has_many :scores,dependent: :destroy
     validates :password,length: {minimum:6, allow_nil: true}
+    has_many :attempted_papers,dependent: :destroy
 
     enum role: [:student, :admin]
     after_initialize :set_default_role, :if => :new_record?

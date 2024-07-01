@@ -2,10 +2,10 @@ class PapersController < ApplicationController
     before_action :require_user, only: [:index]
     before_action :require_admin, only: [:new, :create, :edit, :update, :destroy,:allowpaper]
     before_action :set_paper, only: [:show, :edit, :update, :destroy,:resultpage,:allowpaper]
-    before_action :require_approved_user,only: [:paperstart,:submitPaper,:resultpage]
+    before_action :require_approved_user ,only: [:paperstart,:submitPaper,:resultpage]
 
     def index 
-        @papers = Paper.all
+        @papers = Paper.where.not(id: current_user.attempted_papers.pluck(:paper_id))
         @paper = Paper.new 
     end 
 
@@ -30,7 +30,8 @@ class PapersController < ApplicationController
     end
 
     def update
-
+        @paper.update(paper_params)
+        redirect_to papers_path, notice: "Paper was successfully updated."
     end
 
     def destroy
@@ -49,13 +50,16 @@ class PapersController < ApplicationController
 
     def paperstart 
         @paper = Paper.friendly.includes(:questions).find(params[:id])
+        @user = current_user
         @questions = @paper.questions 
+        if AttemptedPaper.exists?(user_id: @user.id, paper_id: @paper.id)
+            redirect_to resultpage_path(@paper), notice: "You have already attempted this paper"
+        end
     end
 
     def submitPaper
         @paper = Paper.find(params[:paper_id])
-        @questions = @paper.questions
-        @user = current_user
+        @questions = @paper.questions 
         @score = 0
 
         question_ids = @questions.map(&:id)
@@ -73,6 +77,7 @@ class PapersController < ApplicationController
 
         score = Score.find_or_initialize_by(paper_id: @paper.id, user_id: current_user.id)
         score.update(score: @score, total_question_count: @questions.count)
+        AttemptedPaper.create(user_id: current_user.id, paper_id: @paper.id)
         redirect_to resultpage_path(@paper)
     end
 

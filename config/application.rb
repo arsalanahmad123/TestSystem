@@ -10,7 +10,9 @@ module PAF
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.exceptions_app = self.routes
+    config.time_zone = 'Islamabad' # Set your desired time zone
+    config.active_record.default_timezone = :local
+
 
     # Configuration for the application, engines, and railties goes here.
     #

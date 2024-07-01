@@ -1,6 +1,7 @@
 <tr dom_id="question_<%= index %> ">
+  <% font_class = @paper.title.include?('Urdu') ? 'font-nostaliq' : 'font-quicksand' %>
   <th><%= index %></th>
-  <td><%= question.content %></td>
+  <td> <%= question.content %></td>
   <td><%= question.choice1 %></td>
   <td><%= question.choice2 %></td>
   <td><%= question.choice3 %></td>
@@ -14,6 +15,13 @@
     } do %>
         <span class="text-red-500 hover:text-red-600">
           <i class="material-icons">delete</i>
+        </span>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to  edit_paper_question_path(question.paper,question) do %>
+        <span class="text-blue-500 hover:text-blue-600">
+          <i class="material-icons">edit</i>
         </span>
       <% end %>
     </td>

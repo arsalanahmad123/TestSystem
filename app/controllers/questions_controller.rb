@@ -43,6 +43,19 @@ class QuestionsController < ApplicationController
         end
     end
 
+    def edit 
+        @paper = Paper.friendly.find(params[:paper_id])
+        @question = @paper.questions.find(params[:id])
+    end
+
+    def update 
+        @paper = Paper.friendly.find(params[:paper_id])
+        @question = @paper.questions.find(params[:id])
+        @question.update(question_params)
+        redirect_to paper_path(@paper), notice: "Question was successfully updated."
+    end
+
+
     private 
 
         def set_paper 

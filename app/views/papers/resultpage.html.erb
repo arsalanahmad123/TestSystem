@@ -1,11 +1,14 @@
 <div class="bg-slate-100 shadow-xl p-10 shadow-indigo-200 animate__animated animate__fadeInBottomRight mb-10 rounded-md w-[90%] mx-auto dark:bg-slate-900 dark:text-white dark:shadow-slate-700 mt-12">
-  <h1 class="text-6xl font-extrabold mt-10 text-center text-slate-950 italic dark:text-white">Result</h1>
+  <h1 class="md:text-6xl text-5xl font-extrabold mt-10 text-center text-slate-950 italic dark:text-white">Result</h1>
+  <div class="mt-10 mb-10 text-center mx-auto">
+    <span class="md:text-[16px] text-center text-white font-bold text-[14px]  px-4 py-2 bg-indigo-600 rounded-md shadow-indigo-900 shadow-2xl dark:from-slate-700 dark:to-slate-800 dark:text-white"><%= @score.calculate_percentage %></span>
+  </div>
   <div class="mt-10  bg-gradient-to-tr from-slate-100 to-slate-300 p-2 rounded-md w-fit ml-auto text-slate-950 shadow-slate-900 shadow-2xl dark:from-slate-700 dark:to-slate-800 dark:text-white">
     <span class="text-[18px] px-4 py-2">You got <span class="font-bold text-[20px]"><%= @score.score %></span> out of <span class="font-bold text-[20px]"><%= @score.total_question_count %></span>
     </span>
   </div>
   <div class="mt-10 mb-10">
-    <h1 class="text-4xl text-slate-950 font-bold dark:text-white">Questions:</h1>
+    <h1 class="md:text-4xl text-3xl text-slate-950 font-bold dark:text-white">Questions:</h1>
   </div>
   <% @questions.each_with_index do |question, index| %>
     <div class="mt-5 flex flex-col gap-y-5">

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_02_084457) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_07_081606) do
+  create_table "attempted_papers", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "paper_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paper_id"], name: "index_attempted_papers_on_paper_id"
+    t.index ["user_id"], name: "index_attempted_papers_on_user_id"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -78,6 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_084457) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "attempted_papers", "papers"
+  add_foreign_key "attempted_papers", "users"
   add_foreign_key "questions", "papers"
   add_foreign_key "responses", "questions"
   add_foreign_key "responses", "users"

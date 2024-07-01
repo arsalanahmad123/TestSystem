@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
+        nostaliq: ['Noto Nastaliq Urdu', 'serif'],
       },
       animation: {
         'rotate-slow': 'rotate 1s linear infinite',

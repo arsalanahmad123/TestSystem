@@ -5,14 +5,19 @@
     <% end %>
   </div>
   <div class="navbar-center hidden lg:flex gap-x-3">
-    <a href="/#about" class="nav-item hover:underline">About us</a>
-    <a href="/#services" class="nav-item hover:underline">Services</a>
-    <a href="/#whatnew" class="nav-item hover:underline">What's new</a>
-    <a href="/#contact" class="nav-item hover:underline">Contact</a>
+    <% if !logged_in? || logged_in? || !current_user.admin? %>
+      <div class="gap-x-5 flex">
+        <a href="/#about" class="nav-item hover:underline">About us</a>
+        <a href="/#services" class="nav-item hover:underline">Services</a>
+        <a href="/#whatnew" class="nav-item hover:underline">What's new</a>
+        <a href="/#contact" class="nav-item hover:underline">Contact</a>
+      </div>
+    <%  end %>
     <% if logged_in? %>
       <% if current_user.admin? %>
         <%= link_to "Papers",papers_path,class: "btn btn-ghost font-bold dark:text-white dark:bg-slate-900" %>
         <%= link_to "Users",users_path,class: "btn btn-ghost font-bold dark:text-white dark:bg-slate-900" %>
+        <%= link_to "Students Results",users_data_path,class: "btn btn-ghost font-bold dark:text-white dark:bg-slate-900" %>
       <% end %>
     <% end %>
   </div>
@@ -65,6 +70,9 @@
           <% if current_user.admin? %>
             <li class="py-1 px-6 rounded-md hover:bg-indigo-500 hover:text-white transition-all duration-200 hover:cursor-pointer text-sm dark:text-white whitespace-nowrap">
               <%= link_to "Users", users_path %>
+            </li>
+            <li class="py-1 px-6 rounded-md hover:bg-indigo-500 hover:text-white transition-all duration-200 hover:cursor-pointer text-sm dark:text-white whitespace-nowrap">
+              <%= link_to "Users Results", users_data_path %>
             </li>
           <% end %>
         <% end %>

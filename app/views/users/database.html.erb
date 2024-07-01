@@ -1,0 +1,39 @@
+<div class="flex overflow-x-auto w-[95%] mx-auto flex-col h-screen mt-12">
+  <h1 class="text-4xl lg:text-6xl text-indigo-500 dark:text-white mb-5 font-extrabold">Users</h1>
+  <table class="table-hover table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Paper Name</th>
+        <th>Points</th>
+        <th>Total</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @papers.each do |paper| %>
+        <tr>
+          <td colspan="5" class="bg-indigo-200 dark:bg-gray-800 font-bold rounded-md cursor-pointer">
+            <div class="flex justify-between items-center">
+              <%= paper.title %>
+              <i class="material-icons">arrow_downward</i>
+            </div>
+          </td>
+        </tr>
+        <% @users.each do |user| %>
+          <% user.scores.each do |score| %>
+            <% if score.paper == paper %>
+              <tr>
+                <td><%= user.username %></td>
+                <td><%= score.paper.title %></td>
+                <td><%= score.score %></td>
+                <td><%= score.paper.questions.count %></td>
+                <td><%= score.updated_at.strftime("%H:%M %p") %>, <%= score.updated_at.strftime("%d/%m/%Y") %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

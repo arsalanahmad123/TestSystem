@@ -13,6 +13,7 @@ document.addEventListener("turbo:load", function () {
         modalFrame.classList.toggle("hidden");
     });
 
+
     function detectDarkMode() {
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const html = document.querySelector('html');

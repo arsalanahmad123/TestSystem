@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-    before_action :require_admin,only: [:verify_user]
+    before_action :require_admin,only: [:verify_user,:database,:destroy,:resetuserpaper]
     before_action :restrict_user,only: [:new,:create]
-    before_action :require_user,only: [:profile]
+    before_action :require_user,only: [:profile,:edit,:update]
     def new 
         @user = User.new
     end
 
     def index 
-        @users = User.all_except(current_user)
+        @users = User.all 
     end
 
     def verify_user 
@@ -29,6 +29,19 @@ class UsersController < ApplicationController
         end 
     end
 
+
+    def resetuserpaper 
+        user = User.find(params[:id])
+        if !user.attempted_papers.empty?
+            user.attempted_papers.each do |attempted_paper|
+                attempted_paper.destroy
+            end
+            redirect_to users_path, notice: "User Paper Reset Successful"
+        else
+            redirect_to users_path, notice: "User's Attempted Papers are Empty"
+        end
+    end
+
     def create 
         @user = User.new(user_params)
         if @user.save 
@@ -41,12 +54,41 @@ class UsersController < ApplicationController
         end
     end
 
+    def edit 
+        @user = current_user if current_user
+    end 
+
+    def update 
+        @user = current_user
+        @user.update(user_params)
+        redirect_to profile_path, notice: "Profile was successfully updated."
+    end
+
     def profile 
         @user = current_user
         @scores = @user.scores 
         @papers = []
         @scores.each do |score|
             @papers << score.paper
+        end
+    end
+
+
+    def database 
+        @papers = Paper.all
+        @users = User.includes(scores: :paper).all
+    end
+
+    def destroy 
+        @user = User.find(params[:id])
+        if @user.destroy 
+            respond_to do |format|
+                format.turbo_stream{
+                    render turbo_stream: turbo_stream.remove("user-#{@user.id}")
+                }
+            end
+        else
+            redirect_to users_path, notice: "Something went wrong"
         end
     end
 
